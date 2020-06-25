@@ -33,21 +33,7 @@ id: ZQQEDSYRzB
 
 - 在`src`目录下创建`tpl`目录用于存放模板，再创建`index.html`文件。
 
-![](TypeScript学习笔记2/2.png)
-
-```html
-//./src/tpl/index.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>TypeScript</title>
-</head>
-<body>
-    <div class="app"></div>
-</body>
-</html>
-```
+![](TypeScript学习笔记2/4.png)
 
 ### 配置webpack.base.config.js公共环境
 
