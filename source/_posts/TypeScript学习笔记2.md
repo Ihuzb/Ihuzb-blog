@@ -36,7 +36,7 @@ id: ZQQEDSYRzB
 ![](TypeScript学习笔记2/2.png)
 
 ```html
-<!--./src/tpl/index.html-->
+//./src/tpl/index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
