@@ -6,5 +6,5 @@ tags:
 #分类
 categories:
 #id
-id: {{ id }}
+id: 
 ---
