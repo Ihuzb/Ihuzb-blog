@@ -155,7 +155,20 @@ module.exports = merge(baseConfig, config)
 },
 ```
 
-- `npm run start`，运行开发环境，打开`http://127.0.0.1:8080/`查看。
+- `npm run start`，运行开发环境，打开`http://127.0.0.1:8080/`查看。代码结果可直接在浏览器控制台查看。
 - `npm run build`，运行生产环境，生成`dist`文件。生成的`index.html`文件使用之前`/src/tpl/index.html`为模板，新增生成的`app.js`文件引用。
 
 ![](TypeScript学习笔记2/3.png)
+
+# 使用TypeScript构建工具
+
+- 修改一下`index.ts`文件内容;
+
+```js
+let hello: string = 'Hello TypeScript';
+document.querySelectorAll('.app')[0].innerHTML = hello;
+console.log(hello);
+```
+- 在浏览器查看;
+
+![](TypeScript学习笔记2/5.png)
