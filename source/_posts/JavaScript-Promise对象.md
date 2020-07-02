@@ -105,3 +105,163 @@ Promise.all([a, b, c]).then(value => {
 });
 
 ```
+
+### Promise.race(iterable)
+
+- `Promise.race(iterable)`方法返回一个`promise`，一旦迭代器中的某个`promise`解决或拒绝，返回的`promise`就会解决或拒绝。
+- 可以理解为竞速，谁先执行完返回谁的结果。
+
+```js
+let a = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('a')
+    }, 100)
+});
+
+let b = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve('b')
+    }, 500)
+});
+
+Promise.race([a, b]).then(res => {
+    // a更快所以返回a的结果
+    console.log(res)
+})
+```
+
+### Promise.reject()
+
+- `Promise.reject()`方法返回一个带有失败原因的`Promise`对象。
+
+```js
+let a = Promise.reject('失败了！！');
+
+a.then(res => {
+    console.log(res)
+}, err => {
+    //失败了！！
+    console.log(err)
+});
+```
+
+### Promise.resolve()
+
+- `Promise.resolve()`方法返回一个以给定值解析后的`Promise`对象。
+
+```js
+let a = Promise.resolve('成功了！！');
+
+a.then(res => {
+    //成功了！！
+    console.log(res)
+}, err => {
+    console.log(err)
+});
+```
+
+# Promise原型方法
+
+### Promise.prototype.then(onFulfilled, onRejected)
+
+- `then()`方法返回一个`Promise`。它最多需要有两个参数：`Promise`的成功和失败情况的回调函数。
+- `onFulfilled`当`Promise`变成接受状态`fulfilled`时调用的函数。
+- `onRejected`当`Promise`变成拒绝状态`rejected`时调用的函数。
+
+```js
+let a = Promise.resolve('成功了');
+a.then(res => {
+    // 成功了
+    console.log(res)//成功时
+}, err => {
+    console.log(err)//失败时
+})
+```
+- 链式调用
+    - `then`方法返回一个`Promise`对象，其允许方法链。
+
+```js
+// 链式调用 
+let a = Promise.resolve('成功了');
+a.then(res => {
+    return Promise.reject('失败了');
+}, err => {
+    console.log(err)
+}).then(res => {
+    console.log(res)
+}, err => {
+    // 失败了
+    console.log(err)
+})
+```
+
+### Promise.prototype.catch(onRejected)
+
+- `catch()`方法返回一个`Promise`，并且处理拒绝的情况。
+```js
+// catch链式操作 1
+let a = Promise.reject('失败了1');
+a.then(res => {
+    console.log(res)
+}).catch(err => {
+    // 失败了1
+    console.log(err);
+    return Promise.reject('失败了2');
+}).then(res => {
+    console.log(res)
+}).catch(err => {
+    // 失败了2'
+    console.log(err)
+})
+```
+
+```js
+// catch链式操作 2
+new Promise((resolve, reject) => {
+    console.log('初始化');
+    resolve();
+}).then(() => {
+    throw new Error('有哪里不对了');
+    console.log('执行「这个」”');
+}).catch(() => {
+    console.log('执行「那个」');
+}).then(() => {
+    console.log('执行「这个」，无论前面发生了什么');
+});
+// 最终输出结果
+// 初始化
+// 执行“那个”
+// 执行“这个”，无论前面发生了什么
+```
+
+- 如果`then`函数中有`onRejected`回调函数，`catach`不会执行
+
+```js
+let a = Promise.reject('失败了');
+a.then(res => {
+    console.log(res);
+}, err => {
+    // 失败了 1
+    console.log(err, 1);
+}).catch(err => {
+    console.log(err, 2);
+});
+```
+
+### Promise.prototype.finally(onFinally)
+
+- `finally()`方法返回一个`Promise`。在`promise`结束时，无论结果是`fulfilled`或者是`rejected`，都会执行指定的回调函数。
+- 由于无法知道`promise`的最终状态，所以`finally`的回调函数中不接收任何参数，它仅用于无论最终结果如何都要执行的情况。
+
+```js
+let a = Promise.reject('失败了');
+a.then(res => {
+    console.log(res);
+}).catch(err => {
+    // 失败了
+    console.log(err);
+}).finally(() => {
+    // 123
+    console.log(123)
+})
+```
