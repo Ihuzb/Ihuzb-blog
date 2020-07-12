@@ -130,4 +130,4 @@ setTimeout(function () {
 
 ## 最终效果
 
-![微信截图_20200520110933.png](https://upload-images.jianshu.io/upload_images/7059932-5f0b636e04a271b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](W4J音乐热评一生成评论词云一Nodejs开启子进程/1.png)
